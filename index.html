@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Predictor</title>
+    <style>
+        /* Base & Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Main Container */
+        .container {
+            background: #ffffff;
+            width: 90%;
+            max-width: 800px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* FadeIn Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Headings */
+        h2 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Search Box */
+        .search-box {
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 12px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: #0072ff;
+        }
+
+        /* Symptom List Container */
+        .symptom-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #fff;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Styling for each symptom label */
+        .symptom-label {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            padding: 12px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            min-height: 50px;
+        }
+
+        .symptom-label input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .symptom-label span {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            border-radius: 20px;
+        }
+
+        .symptom-label:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.05);
+        }
+
+        .symptom-label input:checked + span {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Predict Button */
+        button {
+            background: linear-gradient(135deg, #28a745, #218838);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Result Display */
+        .result-container {
+            margin-top: 25px;
+            padding: 20px;
+            background: #fefefe;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .result-container h3 {
+            margin-bottom: 10px;
+            color: #0072ff;
+            border-bottom: 2px solid #0072ff;
+            padding-bottom: 5px;
+            font-size: 1.5em;
+        }
+
+        .result-container p {
+            margin: 8px 0;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .result-container strong {
+            color: #28a745;
+        }
+
+        .selected-symptoms {
+            margin-top: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .selected-symptoms span {
+            color: #0072ff;
+        }
+
+        /* No Match Text */
+        #result.no-match {
+            color: #e57373;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: linear-gradient(135deg, #f39c12, #f1c40f);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Tablet List Button */
+        .tablet-btn {
+            background: linear-gradient(135deg, #ff6f61, #ff3b30);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tablet-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <h2>Disease Predictor</h2>
+        <p>Select your symptoms:</p>
+
+        <!-- Search Box for Symptoms -->
+        <input type="text" id="searchInput" class="search-box" placeholder="Search Symptoms..." oninput="filterSymptoms()">
+
+        <!-- Symptoms container -->
+        <div class="symptom-list" id="symptomsContainer"></div>
+
+        <p class="selected-symptoms">Selected: <span id="selectedSymptoms">None</span></p>
+
+        <button onclick="predictDisease()">Predict Disease</button>
+
+        <div id="result"></div>
+
+        <!-- Back Button to refresh or go back -->
+        <button class="back-btn" onclick="goBack()">Back</button>
+
+        <!-- Redirect Button to Medical Tablet List page -->
+        <button class="tablet-btn" onclick="goToTabletList()">View Medical Tablet List</button>
+
+
+
+        <div class="note">
+            <h2>Doctor’s Further Information</h2>
+            <p>Please note that the information provided here is for general educational purposes only. Always consult your doctor or healthcare provider before taking any medication to ensure it is safe and appropriate for your individual health needs. This includes any tablet listed for fever, pain, infections, or allergies. Self-medication can lead to unintended side effects or complications. If symptoms persist or worsen, seek medical advice promptly.</p>
+        </div>
+        
+    </div>
+
+    <script>
+        const symptomDataset = [
+            "Fever", "Cough", "Headache", "Sore throat", "Fatigue", "Shortness of breath", "Chest pain",
+            "Nausea", "Vomiting", "Diarrhea", "Muscle pain", "Joint pain", "Loss of taste", "Loss of smell",
+            "Runny nose", "Night sweats", "Weight loss", "Skin rash", "Sneezing", "Wheezing", "Abdominal pain",
+            "Bloating", "Heartburn", "Indigestion", "Loss of appetite", "Severe diarrhea", "Dehydration",
+            "Severe headache", "Neck stiffness", "Confusion", "Swollen glands", "Red eyes", "Facial pain",
+            "Nasal congestion", "Mucus production", "Chest tightness", "Chronic cough", "Coughing up blood",
+            "Mild fever", "Ear pain", "Hearing loss", "Fluid drainage", "Regurgitation", "Difficulty swallowing",
+            "Pelvic pain", "Painful urination", "Frequent urination", "Cloudy urine", "Blood in urine",
+            "Burning sensation when urinating", "Dizziness", "Blurred vision", "Nosebleeds", "Cold intolerance",
+            "Rapid heartbeat", "Sweating", "Extreme thirst", "Weight gain", "Bone fractures", "Back pain",
+            "Loss of height", "Weak bones", "Seizures", "Uncontrollable movements", "Loss of consciousness",
+            "Sudden weakness", "Slurred speech", "Facial drooping", "Vision problems", "Memory loss",
+            "Difficulty speaking", "Mood changes", "Tremors", "Slow movement", "Imbalance", "Persistent sadness",
+            "Loss of interest", "Insomnia", "Excessive worry", "Restlessness", "Hallucinations",
+            "Disorganized thinking", "Delusions", "Emotional withdrawal", "Extreme mood swings", "Mania",
+            "Impulsivity"
+        ];
+
+        const diseaseDataset = [
+            {   
+                name: "Flu",
+                symptoms: ["Fever", "Cough", "Fatigue", "Sore throat", "Runny nose", "Muscle pain"],
+                description: "A common viral infection that can be deadly, especially in high-risk groups.",
+                solution: "Rest, fluids, and antiviral medication if severe. Vaccination helps prevent it."
+            },
+            {   
+                name: "Common Cold",
+                symptoms: ["Sneezing", "Cough", "Runny nose", "Sore throat", "Mild fever"],
+                description: "A mild viral infection affecting the nose, throat, and sinuses.",
+                solution: "Rest, hydration, over-the-counter medicine, and steam inhalation."
+            },
+            // Additional diseases...
+        ];
+
+        const symptomsContainer = document.getElementById("symptomsContainer");
+
+        // Render symptom checkboxes dynamically
+        symptomDataset.forEach(symptom => {
+            const label = document.createElement("label");
+            label.classList.add("symptom-label");
+            label.innerHTML = `
+                <input type="checkbox" value="${symptom}" onchange="updateSelected()"> 
+                <span>${symptom}</span>
+            `;
+            symptomsContainer.appendChild(label);
+        });
+
+        function updateSelected() {
+            const selected = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(cb => cb.value);
+            document.getElementById("selectedSymptoms").textContent = selected.join(", ") || "None";
+        }
+
+        function filterSymptoms() {
+            const searchText = document.getElementById("searchInput").value.toLowerCase();
+            const filteredSymptoms = symptomDataset.filter(symptom => symptom.toLowerCase().includes(searchText));
+            symptomsContainer.innerHTML = ''; // Clear current symptoms
+            filteredSymptoms.forEach(symptom => {
+                const label = document.createElement("label");
+                label.classList.add("symptom-label");
+                label.innerHTML = `
+                    <input type="checkbox" value="${symptom}" onchange="updateSelected()"> 
+                    <span>${symptom}</span>
+                `;
+                symptomsContainer.appendChild(label);
+            });
+        }
+
+        function predictDisease() {
+            const selectedSymptoms = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(cb => cb.value);
+
+            if (selectedSymptoms.length === 0) {
+                document.getElementById("result").textContent = "Please select at least one symptom.";
+                return;
+            }
+
+            let possibleDiseases = diseaseDataset.map(disease => {
+                const matchCount = disease.symptoms.filter(symptom => selectedSymptoms.includes(symptom)).length;
+                return { ...disease, matchCount };
+            });
+
+            possibleDiseases = possibleDiseases.filter(d => d.matchCount > 0);
+            possibleDiseases.sort((a, b) => b.matchCount - a.matchCount);
+
+            if (possibleDiseases.length > 0) {
+                let resultContent = '';
+                possibleDiseases.forEach(disease => {
+                    resultContent += `
+                        <div class="result-container">
+                            <h3>${disease.name}</h3>
+                            <strong>Symptoms:</strong> ${disease.symptoms.join(", ")} <br>
+                            <strong>Description:</strong> ${disease.description} <br>
+                            <strong>Solution:</strong> ${disease.solution}
+                        </div>
+                    `;
+                });
+                document.getElementById("result").innerHTML = resultContent;
+                document.getElementById("result").classList.remove("no-match");
+            } else {
+                document.getElementById("result").classList.add("no-match");
+                document.getElementById("result").textContent = "No matching disease found.";
+            }
+        }
+
+        // Function to go back to the initial state
+        function goBack() {
+            location.reload();
+        }
+
+        // Redirect to the Medical Tablet List Page
+        function goToTabletList() {
+            window.location.href = "sss.html"; // You can replace this with your actual page URL
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Tablet List</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9; /* Soft light background */
+            color: #333; /* Dark text for readability */
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3436; /* Dark grey for header text */
+            font-size: 36px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff; /* White background for tables */
+            margin-bottom: 20px;
+            border-radius: 8px; /* Rounded corners for table */
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #dfe6e9; /* Light grey border */
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #0984e3; /* Fresh blue for table headers */
+            color: white;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        h2 {
+            background-color: #00b894; /* Soft green for section titles */
+            color: white;
+            padding: 12px;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 24px;
+            border-radius: 6px;
+        }
+
+        /* Search Bar Styles */
+        #searchBox {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #636e72; /* Dark grey border for search box */
+            border-radius: 25px; /* Rounded corners for search box */
+            outline: none;
+            background-color: #ffffff;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 9999; /* Keep the search bar on top */
+        }
+
+        #searchBox:focus {
+            border-color: #0984e3; /* Highlight border when focused */
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Search Bar -->
+<input type="text" id="searchBox" onkeyup="searchAllTables()" placeholder="🔍 Search for a tablet...">
+
+<script>
+    function searchAllTables() {
+        let input = document.getElementById("searchBox").value.toLowerCase();
+        let tables = document.getElementsByTagName("table");
+
+        for (let table of tables) {
+            let rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) { // Start from 1 to skip table headers
+                let rowText = rows[i].innerText.toLowerCase();
+                rows[i].style.display = rowText.includes(input) ? "" : "none";
+            }
+        }
+    }
+</script>
+
+<!-- Content Section -->
+<div class="container">
+    
+    <!-- Fever & Pain -->
+    <h2>Fever & Pain</h2>
+    <table>
+        <tr><th>Tablet Name</th><th>Dosage</th><th>Age Group</th><th>Description</th></tr>
+        <tr><td>Paracetamol</td><td>500mg</td><td>All Ages</td><td>Fever and pain relief</td></tr>
+        <tr><td>Ibuprofen</td><td>400mg</td><td>12+ years</td><td>Anti-inflammatory, pain reliever</td></tr>
+        <tr><td>Naproxen</td><td>500mg</td><td>Adults</td><td>For arthritis and pain relief</td></tr>
+        <tr><td>Diclofenac</td><td>50mg</td><td>Adults</td><td>For pain and inflammation</td></tr>
+        <tr><td>Aspirin</td><td>325mg</td><td>Adults</td><td>Reduces fever, pain, inflammation</td></tr>
+        <tr><td>Tramadol</td><td>50mg</td><td>Adults</td><td>Moderate to severe pain relief</td></tr>
+        <tr><td>Acetaminophen</td><td>500mg</td><td>All Ages</td><td>Pain reliever and fever reducer</td></tr>
+        <tr><td>Meloxicam</td><td>15mg</td><td>Adults</td><td>For osteoarthritis and pain</td></tr>
+        <tr><td>Etodolac</td><td>300mg</td><td>Adults</td><td>NSAID for pain and inflammation</td></tr>
+        <tr><td>Ketorolac</td><td>10mg</td><td>Adults</td><td>Short-term pain relief</td></tr>
+        <tr><td>Piroxicam</td><td>20mg</td><td>Adults</td><td>Long-acting pain reliever</td></tr>
+        <tr><td>Flurbiprofen</td><td>100mg</td><td>Adults</td><td>Anti-inflammatory pain reliever</td></tr>
+        <tr><td>Nimesulide</td><td>100mg</td><td>Adults</td><td>NSAID for pain and fever</td></tr>
+        <tr><td>Mefenamic Acid</td><td>500mg</td><td>Adults</td><td>For menstrual pain and fever</td></tr>
+        <tr><td>Oxycodone</td><td>10mg</td><td>Adults</td><td>Opioid pain medication</td></tr>
+        <tr><td>Morphine</td><td>15mg</td><td>Adults</td><td>Severe pain relief</td></tr>
+        <tr><td>Codeine</td><td>30mg</td><td>Adults</td><td>For moderate pain</td></tr>
+        <tr><td>Hydrocodone</td><td>10mg</td><td>Adults</td><td>Opioid pain medication</td></tr>
+        <tr><td>Butorphanol</td><td>2mg</td><td>Adults</td><td>For severe pain</td></tr>
+        <tr><td>Fentanyl</td><td>25mcg</td><td>Adults</td><td>Strong opioid for severe pain</td></tr>
+        <tr><td>Tizanidine</td><td>4mg</td><td>Adults</td><td>Muscle relaxant for pain relief</td></tr>
+        <tr><td>Baclofen</td><td>10mg</td><td>Adults</td><td>Muscle relaxer for spasticity pain</td></tr>
+        <tr><td>Carisoprodol</td><td>350mg</td><td>Adults</td><td>Muscle relaxant for pain</td></tr>
+        <tr><td>Gabapentin</td><td>300mg</td><td>Adults</td><td>Nerve pain relief</td></tr>
+        <tr><td>Pregabalin</td><td>75mg</td><td>Adults</td><td>Treats nerve pain</td></tr>
+        <tr><td>Amitriptyline</td><td>25mg</td><td>Adults</td><td>For chronic pain</td></tr>
+        <tr><td>Duloxetine</td><td>30mg</td><td>Adults</td><td>For nerve pain and depression</td></tr>
+        <tr><td>Topiramate</td><td>50mg</td><td>Adults</td><td>For migraines and nerve pain</td></tr>
+        <tr><td>Clonidine</td><td>0.1mg</td><td>Adults</td><td>For pain management and BP</td></tr>
+    </table>
+    
+    <!-- Infections -->
+<h2>Bacterial Infections</h2>
+<table>
+<tr><th>Tablet Name</th><th>Dosage</th><th>Age Group</th><th>Description</th></tr>
+<tr><td>Amoxicillin</td><td>250mg</td><td>2+ years</td><td>Common antibiotic</td></tr>
+<tr><td>Azithromycin</td><td>500mg</td><td>6+ years</td><td>Respiratory infection treatment</td></tr>
+<tr><td>Doxycycline</td><td>100mg</td><td>Adults</td><td>For infections, acne, malaria</td></tr>
+<tr><td>Cephalexin</td><td>500mg</td><td>Adults</td><td>For skin and respiratory infections</td></tr>
+<tr><td>Ciprofloxacin</td><td>500mg</td><td>Adults</td><td>Broad-spectrum antibiotic</td></tr>
+<tr><td>Clarithromycin</td><td>500mg</td><td>Adults</td><td>For respiratory infections</td></tr>
+<tr><td>Levofloxacin</td><td>500mg</td><td>Adults</td><td>For pneumonia, UTIs</td></tr>
+<tr><td>Rifampin</td><td>300mg</td><td>Adults</td><td>For tuberculosis treatment</td></tr>
+<tr><td>Vancomycin</td><td>125mg</td><td>Adults</td><td>For severe bacterial infections</td></tr>
+<tr><td>Piperacillin/Tazobactam</td><td>4.5g</td><td>Adults</td><td>For severe infections</td></tr>
+<tr><td>Moxifloxacin</td><td>400mg</td><td>Adults</td><td>For skin, sinus infections</td></tr>
+<tr><td>Linezolid</td><td>600mg</td><td>Adults</td><td>For pneumonia, MRSA</td></tr>
+<tr><td>Tigecycline</td><td>50mg</td><td>Adults</td><td>For drug-resistant infections</td></tr>
+<tr><td>Fosfomycin</td><td>3g</td><td>Adults</td><td>For urinary tract infections</td></tr>
+<tr><td>Minocycline</td><td>100mg</td><td>Adults</td><td>For acne, respiratory infections</td></tr>
+<tr><td>Gentamicin</td><td>80mg</td><td>Adults</td><td>For severe bacterial infections</td></tr>
+<tr><td>Metronidazole</td><td>500mg</td><td>Adults</td><td>For bacterial & parasitic infections</td></tr>
+<tr><td>Erythromycin</td><td>500mg</td><td>Adults</td><td>For respiratory & skin infections</td></tr>
+<tr><td>Sulfamethoxazole/Trimethoprim</td><td>800mg/160mg</td><td>Adults</td><td>For UTIs & bacterial infections</td></tr>
+<tr><td>Ceftriaxone</td><td>1g</td><td>Adults</td><td>For pneumonia & meningitis</td></tr>
+<tr><td>Cefuroxime</td><td>500mg</td><td>Adults</td><td>For sinus & lung infections</td></tr>
+<tr><td>Ceftazidime</td><td>1g</td><td>Adults</td><td>For pneumonia & blood infections</td></tr>
+<tr><td>Meropenem</td><td>1g</td><td>Adults</td><td>For drug-resistant infections</td></tr>
+<tr><td>Imipenem/Cilastatin</td><td>500mg</td><td>Adults</td><td>For severe bacterial infections</td></tr>
+</table>
+
+<!-- Diabetes -->
+<h2>Diabetes</h2>
+<table>
+<tr><th>Tablet Name</th><th>Dosage</th><th>Age Group</th><th>Description</th></tr>
+<tr><td>Metformin</td><td>500mg</td><td>Adults</td><td>Controls blood sugar</td></tr>
+<tr><td>Glibenclamide</td><td>5mg</td><td>Adults</td><td>Manages diabetes</td></tr>
+<tr><td>Pioglitazone</td><td>15mg</td><td>Adults</td><td>Regulates blood sugar</td></tr>
+<tr><td>Empagliflozin</td><td>10mg</td><td>Adults</td><td>Helps kidneys remove glucose</td></tr>
+<tr><td>Dapagliflozin</td><td>10mg</td><td>Adults</td><td>Improves glucose control</td></tr>
+<tr><td>Sitagliptin</td><td>100mg</td><td>Adults</td><td>Type 2 diabetes treatment</td></tr>
+<tr><td>Vildagliptin</td><td>50mg</td><td>Adults</td><td>Helps pancreas produce insulin</td></tr>
+<tr><td>Canagliflozin</td><td>100mg</td><td>Adults</td><td>Improves glucose control</td></tr>
+<tr><td>Glimepiride</td><td>2mg</td><td>Adults</td><td>Stimulates insulin production</td></tr>
+<tr><td>Repaglinide</td><td>1mg</td><td>Adults</td><td>Short-acting insulin stimulator</td></tr>
+<tr><td>Acarbose</td><td>50mg</td><td>Adults</td><td>Slows carbohydrate absorption</td></tr>
+<tr><td>Miglitol</td><td>25mg</td><td>Adults</td><td>Regulates blood sugar</td></tr>
+<tr><td>Rosiglitazone</td><td>4mg</td><td>Adults</td><td>Increases insulin sensitivity</td></tr>
+<tr><td>Linagliptin</td><td>5mg</td><td>Adults</td><td>Helps control blood sugar</td></tr>
+<tr><td>Exenatide</td><td>5mcg</td><td>Adults</td><td>Improves glucose metabolism</td></tr>
+<tr><td>Liraglutide</td><td>1.2mg</td><td>Adults</td><td>Enhances insulin secretion</td></tr>
+<tr><td>Albiglutide</td><td>30mg</td><td>Adults</td><td>Improves blood sugar control</td></tr>
+<tr><td>Dulaglutide</td><td>1.5mg</td><td>Adults</td><td>Regulates insulin levels</td></tr>
+<tr><td>Pramlintide</td><td>30mcg</td><td>Adults</td><td>Helps control post-meal sugars</td></tr>
+<tr><td>Glipizide</td><td>10mg</td><td>Adults</td><td>Stimulates insulin release</td></tr>
+<tr><td>Troglitazone</td><td>400mg</td><td>Adults</td><td>Improves insulin function</td></tr>
+<tr><td>Metformin XR</td><td>750mg</td><td>Adults</td><td>Extended-release Metformin</td></tr>
+<tr><td>Pioglitazone/Metformin</td><td>15mg/500mg</td><td>Adults</td><td>Combination diabetes treatment</td></tr>
+</table>
+
+  <!-- Hypertension -->
+<h2>High Blood Pressure (Hypertension)</h2>
+<table>
+<tr><th>Tablet Name</th><th>Dosage</th><th>Age Group</th><th>Description</th></tr>
+<tr><td>Amlodipine</td><td>5mg</td><td>Adults</td><td>Lowers blood pressure</td></tr>
+<tr><td>Losartan</td><td>50mg</td><td>Adults</td><td>Treats hypertension</td></tr>
+<tr><td>Ramipril</td><td>10mg</td><td>Adults</td><td>ACE inhibitor</td></tr>
+<tr><td>Lisinopril</td><td>10mg</td><td>Adults</td><td>Reduces high blood pressure</td></tr>
+<tr><td>Valsartan</td><td>80mg</td><td>Adults</td><td>Controls blood pressure</td></tr>
+<tr><td>Telmisartan</td><td>40mg</td><td>Adults</td><td>ARB for hypertension</td></tr>
+<tr><td>Hydrochlorothiazide</td><td>25mg</td><td>Adults</td><td>Diuretic for hypertension</td></tr>
+<tr><td>Chlorthalidone</td><td>12.5mg</td><td>Adults</td><td>Reduces fluid retention</td></tr>
+<tr><td>Carvedilol</td><td>6.25mg</td><td>Adults</td><td>Beta-blocker</td></tr>
+<tr><td>Metoprolol</td><td>50mg</td><td>Adults</td><td>Slows heart rate</td></tr>
+<tr><td>Propranolol</td><td>40mg</td><td>Adults</td><td>Reduces blood pressure</td></tr>
+<tr><td>Diltiazem</td><td>30mg</td><td>Adults</td><td>Calcium channel blocker</td></tr>
+<tr><td>Verapamil</td><td>80mg</td><td>Adults</td><td>For hypertension and angina</td></tr>
+<tr><td>Clonidine</td><td>0.1mg</td><td>Adults</td><td>For blood pressure control</td></tr>
+<tr><td>Methyldopa</td><td>250mg</td><td>Adults</td><td>For high blood pressure</td></tr>
+</table>
+
+<!-- Stomach Issues -->
+<h2>Stomach & Digestion</h2>
+<table>
+<tr><th>Tablet Name</th><th>Dosage</th><th>Age Group</th><th>Description</th></tr>
+<tr><td>Omeprazole</td><td>20mg</td><td>Adults</td><td>Acid reflux relief</td></tr>
+<tr><td>Loperamide</td><td>2mg</td><td>Adults</td><td>Controls diarrhea</td></tr>
+<tr><td>Ranitidine</td><td>150mg</td><td>Adults</td><td>Reduces stomach acid</td></tr>
+<tr><td>Pantoprazole</td><td>40mg</td><td>Adults</td><td>GERD treatment</td></tr>
+<tr><td>Esomeprazole</td><td>40mg</td><td>Adults</td><td>Heartburn relief</td></tr>
+<tr><td>Domperidone</td><td>10mg</td><td>Adults</td><td>For nausea and vomiting</td></tr>
+<tr><td>Rabeprazole</td><td>20mg</td><td>Adults</td><td>Reduces acid reflux</td></tr>
+<tr><td>Sucralfate</td><td>1g</td><td>Adults</td><td>Ulcer treatment</td></tr>
+<tr><td>Simethicone</td><td>125mg</td><td>Adults</td><td>Relieves gas and bloating</td></tr>
+<tr><td>Bismuth Subsalicylate</td><td>262mg</td><td>Adults</td><td>For indigestion and nausea</td></tr>
+<tr><td>Famotidine</td><td>20mg</td><td>Adults</td><td>Acid reducer</td></tr>
+</table>
+
+<!-- Mental Health -->
+<h2>Mental Health</h2>
+<table>
+<tr><th>Tablet Name</th><th>Dosage</th><th>Age Group</th><th>Description</th></tr>
+<tr><td>Sertraline</td><td>50mg</td><td>Adults</td><td>For depression and anxiety</td></tr>
+<tr><td>Fluoxetine</td><td>20mg</td><td>Adults</td><td>Antidepressant</td></tr>
+<tr><td>Clonazepam</td><td>0.5mg</td><td>Adults</td><td>For anxiety and seizures</td></tr>
+<tr><td>Diazepam</td><td>5mg</td><td>Adults</td><td>For anxiety and muscle relaxation</td></tr>
+<tr><td>Alprazolam</td><td>0.5mg</td><td>Adults</td><td>Treats panic disorders</td></tr>
+<tr><td>Escitalopram</td><td>10mg</td><td>Adults</td><td>For depression</td></tr>
+<tr><td>Paroxetine</td><td>20mg</td><td>Adults</td><td>For OCD and depression</td></tr>
+<tr><td>Amitriptyline</td><td>25mg</td><td>Adults</td><td>For depression and migraines</td></tr>
+<tr><td>Venlafaxine</td><td>75mg</td><td>Adults</td><td>For anxiety and depression</td></tr>
+<tr><td>Aripiprazole</td><td>10mg</td><td>Adults</td><td>For schizophrenia</td></tr>
+<tr><td>Risperidone</td><td>2mg</td><td>Adults</td><td>For bipolar disorder</td></tr>
+<tr><td>Olanzapine</td><td>5mg</td><td>Adults</td><td>For schizophrenia and bipolar</td></tr>
+<tr><td>Quetiapine</td><td>50mg</td><td>Adults</td><td>Treats bipolar disorder</td></tr>
+<tr><td>Lamotrigine</td><td>100mg</td><td>Adults</td><td>For epilepsy and mood disorders</td></tr>
+</table>
+
+   <!-- Skin Conditions -->
+<h2>Skin Conditions</h2>
+<table>
+<tr><th>Tablet Name</th><th>Dosage</th><th>Age Group</th><th>Description</th></tr>
+<tr><td>Hydroxyzine</td><td>25mg</td><td>Adults</td><td>For itching and hives</td></tr>
+<tr><td>Isotretinoin</td><td>20mg</td><td>Adults</td><td>Treats severe acne</td></tr>
+<tr><td>Clindamycin</td><td>300mg</td><td>Adults</td><td>Treats skin infections</td></tr>
+<tr><td>Doxycycline</td><td>100mg</td><td>Adults</td><td>For acne and skin infections</td></tr>
+<tr><td>Fluconazole</td><td>150mg</td><td>Adults</td><td>Antifungal treatment</td></tr>
+<tr><td>Terbinafine</td><td>250mg</td><td>Adults</td><td>For fungal skin infections</td></tr>
+<tr><td>Cetirizine</td><td>10mg</td><td>All Ages</td><td>For allergies and skin rashes</td></tr>
+<tr><td>Loratadine</td><td>10mg</td><td>All Ages</td><td>Antihistamine for allergies</td></tr>
+<tr><td>Mupirocin</td><td>2% Ointment</td><td>All Ages</td><td>Treats bacterial skin infections</td></tr>
+<tr><td>Betamethasone</td><td>0.5mg</td><td>Adults</td><td>Corticosteroid for skin inflammation</td></tr>
+</table>
+
+<!-- Thyroid Disorders -->
+<h2>Thyroid Disorders</h2>
+<table>
+<tr><th>Tablet Name</th><th>Dosage</th><th>Age Group</th><th>Description</th></tr>
+<tr><td>Levothyroxine</td><td>50mcg</td><td>Adults</td><td>Treats hypothyroidism</td></tr>
+<tr><td>Liothyronine</td><td>25mcg</td><td>Adults</td><td>Thyroid hormone replacement</td></tr>
+<tr><td>Propylthiouracil</td><td>50mg</td><td>Adults</td><td>Treats hyperthyroidism</td></tr>
+<tr><td>Methimazole</td><td>5mg</td><td>Adults</td><td>Reduces thyroid hormone levels</td></tr>
+<tr><td>Carbimazole</td><td>10mg</td><td>Adults</td><td>For overactive thyroid</td></tr>
+<tr><td>Selenium</td><td>200mcg</td><td>Adults</td><td>Supports thyroid function</td></tr>
+<tr><td>Calcium Carbonate</td><td>500mg</td><td>All Ages</td><td>Bone health support for thyroid patients</td></tr>
+</table>
+
+<!-- Arthritis -->
+<h2>Arthritis</h2>
+<table>
+<tr><th>Tablet Name</th><th>Dosage</th><th>Age Group</th><th>Description</th></tr>
+<tr><td>Meloxicam</td><td>7.5mg</td><td>Adults</td><td>Reduces arthritis pain</td></tr>
+<tr><td>Prednisone</td><td>10mg</td><td>Adults</td><td>Anti-inflammatory</td></tr>
+<tr><td>Ibuprofen</td><td>400mg</td><td>12+ years</td><td>Reduces inflammation</td></tr>
+<tr><td>Naproxen</td><td>500mg</td><td>Adults</td><td>Pain reliever for arthritis</td></tr>
+<tr><td>Diclofenac</td><td>50mg</td><td>Adults</td><td>For joint pain</td></tr>
+<tr><td>Hydroxychloroquine</td><td>200mg</td><td>Adults</td><td>Treats rheumatoid arthritis</td></tr>
+<tr><td>Colchicine</td><td>0.6mg</td><td>Adults</td><td>For gout arthritis</td></tr>
+<tr><td>Sulfasalazine</td><td>500mg</td><td>Adults</td><td>Treats autoimmune arthritis</td></tr>
+<tr><td>Methotrexate</td><td>7.5mg</td><td>Adults</td><td>For severe arthritis</td></tr>
+<tr><td>Tofacitinib</td><td>5mg</td><td>Adults</td><td>For rheumatoid arthritis</td></tr>
+</table>
+
+
+
+<div class="note">
+    <h2>Doctor’s Further Information</h2>
+    <p>Please note that the information provided here is for general educational purposes only. Always consult your doctor or healthcare provider before taking any medication to ensure it is safe and appropriate for your individual health needs. This includes any tablet listed for fever, pain, infections, or allergies. Self-medication can lead to unintended side effects or complications. If symptoms persist or worsen, seek medical advice promptly.</p>
+</div>
+
+
+<h1>Redirecting to Disease Predictor...</h1>
+<p>If you are not redirected automatically, <a href="index.html">click here</a>.</p>
+
+
+</div>
+</body>
+</html>
